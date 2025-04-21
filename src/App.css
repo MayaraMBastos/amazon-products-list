@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: auto;
+  margin:  2rem 0 2rem 0;
   gap: 10px;
 }
 
@@ -12,14 +14,14 @@
     height: auto;
     border-radius: 2rem;
     padding: 0.5rem 1rem;
-    background-color: rgba(255, 255, 255, 0.24);
+    background-color: #adadad3d
 }
 
 .input-group input, .input-group button {
     border: none;
     background: transparent;
     font-size: 1rem;
-    color: #d6d4d4;
+    color: #464646;
 }
 
 

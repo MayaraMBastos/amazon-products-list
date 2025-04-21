@@ -34,7 +34,7 @@ function App() {
       <button onClick={handleSearch}>Search</button>
       </div>
 
-      {loading ? <p>Carregando...</p> : <ProductsList products={products} />}
+      {loading ? <p>Loading...</p> : <ProductsList products={products} />}
     </div>
   );
 }
