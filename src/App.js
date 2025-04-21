@@ -1,36 +1,57 @@
-import { useEffect, useState } from "react";
-import "./index.css";
+import { useState } from 'react';
+import './App.css';
 
-import InputSearch from "./InputSearch";
-import ProductsList from "./ProductsList";
-
-export function App() {
-  const [search, setSearch] = useState("");
+function App() {
+  const [keyword, setKeyword] = useState('');
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (search.trim() === "") return;
+  // Função para buscar produtos
+  const handleSearch = async () => {
+    if (!keyword) {
+      setError('Por favor, insira uma palavra-chave.');
+      return;
+    }
 
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch(`/api/scrape?keyword=${encodeURIComponent(search)}`);
-        const data = await res.json();
+    try {
+      const response = await fetch(`http://localhost:3000/api/scrape?keyword=${encodeURIComponent(keyword)}`);
+      const data = await response.json();
+      if (Array.isArray(data) && data.length > 0) {
         setProducts(data);
-      } catch (err) {
-        console.error("Erro ao buscar produtos:", err);
+        setError('');
+      } else {
+        setError('Nenhum produto encontrado.');
+        console.log(data)
         setProducts([]);
       }
-    };
-
-    fetchProducts();
-  }, [search]);
+    } catch (err) {
+      setError('Erro ao buscar os produtos.');
+      console.log(err);
+      setProducts([]);
+    }
+  };
 
   return (
-    <div className="app">
-      <h1>Search Best Products</h1>
-      <p>Search for the best products on Amazon:</p>
-      <InputSearch setSearch={setSearch} />
-      <div><ProductsList products={products} /></div>
+    <div className="App">
+      <h1>Search Products from Amazon</h1>
+      <input 
+        type="text" 
+        placeholder="Keyword..." 
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
+      {error && <p className="error">{error}</p>}
+      <div className="products">
+        {products.map((product, index) => (
+          <div className="product" key={index}>
+            <img src={product.imageUrl} alt={product.title} />
+            <h3>{product.title}</h3>
+            <p>Classificação: {product.rating}</p>
+            <p>Avaliações: {product.reviews}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
