@@ -19,7 +19,16 @@ function ProductsList({ products }) {
       {products.map((product, index) => (
         <div key={index} className={styles.product}>
           <img src={product.image} alt={product.title} />
-          <h3>{product.title}</h3>
+          <h3>
+            <a
+              href={product.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.productLink}
+            >
+              {product.title}
+            </a>
+          </h3>
           <p>
             {renderStars(product.rating)} — {product.reviews} reviews
           </p>

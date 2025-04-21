@@ -40,6 +40,8 @@ app.get("/api/scrape", async (req, res) => {
       const rating = product.querySelector(".a-icon-alt")?.textContent?.trim();
       const reviews = product.querySelector(".a-size-base.s-underline-text")?.textContent?.trim();
       const image = product.querySelector("img.s-image")?.src;
+      const link = product.querySelector("a.a-link-normal")?.href;
+      const url= `https://www.amazon.com${link}`; // Corrigido para incluir o domínio completo
 
       if (title && image) {
         items.push({
@@ -47,6 +49,7 @@ app.get("/api/scrape", async (req, res) => {
           rating,
           reviews,
           image,
+          url,
         });
       }
     });
