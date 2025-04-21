@@ -22,15 +22,17 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Busca na Amazon</h1>
+    <div className="input-container">
+      <h1>Search Products List on Amazon</h1>
+      <div className="input-group">
       <input
         type="text"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
-        placeholder="Digite o produto..."
+        placeholder="Add product name..."
       />
-      <button onClick={handleSearch}>Buscar</button>
+      <button onClick={handleSearch}>Search</button>
+      </div>
 
       {loading ? <p>Carregando...</p> : <ProductsList products={products} />}
     </div>

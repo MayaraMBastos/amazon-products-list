@@ -1,0 +1,32 @@
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .product {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .product img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .product h3 {
+    font-size: 1rem;
+    margin: 8px 0;
+  }
+  
+  .product p {
+    color: #555;
+    font-size: 0.9rem;
+  }
+  
